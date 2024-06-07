@@ -20,7 +20,7 @@
     </div>
 
 
-    <p>{{$post->content}}</p>
+    <p>{!! $post->content !!}</p>
     <img src="{{asset('storage/' . $post->image)}}" alt="{{$post->title}}">
     @if($post->category)
     <p>Category: {{$post->category->name}}</p>

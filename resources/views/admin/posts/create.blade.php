@@ -5,7 +5,7 @@
 @section('content')
     <section>
         <h2>Create a new post</h2>
-        <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Titolo</label>
@@ -69,4 +69,5 @@
 
     </section>
 
+   @include('partials.editor');
 @endsection

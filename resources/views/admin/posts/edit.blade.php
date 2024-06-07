@@ -81,5 +81,5 @@
 
 
     </section>
-
+    @include('partials.editor');
 @endsection
