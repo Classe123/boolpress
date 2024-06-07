@@ -12,6 +12,7 @@ use App\Models\Tag;
 class Post extends Model
 {
     use HasFactory;
+
     protected $fillable = ['title', 'image', 'content', 'slug', 'user_id', 'category_id'];
     //protected $guarded = [];
 
@@ -37,6 +38,6 @@ class Post extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 }
