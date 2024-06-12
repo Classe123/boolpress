@@ -5,13 +5,21 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Builder;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-
-        $posts = Post::with('category')->get();
+        // if ($request->query('category')) {
+        //     $posts = Post::with('category')->where('category_id', $request->query('category'))->paginate(4);
+        // } else {
+        //     $posts = Post::with('category')->paginate(4);
+        // }
+        $category = $request->query('category');
+        $posts = Post::with('category')->when($category, function (Builder $query, string $category) {
+            $query->where('category_id', $category);
+        })->paginate(4);
         //dd($posts);
         return response()->json([
             'status' => 'success',
