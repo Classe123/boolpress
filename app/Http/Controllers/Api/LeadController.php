@@ -24,12 +24,13 @@ class LeadController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'success' => false,
+                'status' => 'error',
+                // 'message' => $validator->errors(),
                 // la funzione errors() della classe Validator resituisce un array
                 // in cui la chiave è il campo soggetto a validazione
                 // e il valore è un array di messaggi di errore
                 'errors' => $validator->errors()
-            ]);
+            ], 401);
         }
 
         $lead = new Lead();
@@ -37,5 +38,10 @@ class LeadController extends Controller
         $lead->save();
 
         Mail::to('info@boolpress.com')->send(new NewContact($lead));
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Ok',
+        ], 200);
     }
 }
